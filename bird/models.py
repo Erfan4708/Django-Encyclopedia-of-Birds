@@ -11,9 +11,6 @@ class Animal(models.Model):
     lifespan = models.IntegerField()
 
 
-class Species(models.Model):
-    animal = models.OneToOneField(Animal, on_delete=models.CASCADE, primary_key=True)
-
 
 class Domain(models.Model):
     name = models.CharField(max_length=100)
@@ -31,19 +28,23 @@ class Phylum(models.Model):
 
 class Class(models.Model):
     name = models.CharField(max_length=100)
-    phylum = models.ForeignKey(Kingdom, on_delete=models.CASCADE)
+    phylum = models.ForeignKey(Phylum, on_delete=models.CASCADE)
 
 
 class Order(models.Model):
     name = models.CharField(max_length=100)
-    Class = models.ForeignKey(Kingdom, on_delete=models.CASCADE)
+    Class = models.ForeignKey(Class, on_delete=models.CASCADE)
 
 class Family(models.Model):
     name = models.CharField(max_length=100)
-    order = models.ForeignKey(Kingdom, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 
 class Genus(models.Model):
     name = models.CharField(max_length=100)
-    family = models.ForeignKey(Kingdom, on_delete=models.CASCADE)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
 
+
+class Species(models.Model):
+    animal = models.OneToOneField(Animal, on_delete=models.CASCADE, primary_key=True)
+    genus = models.ForeignKey(Genus, on_delete=models.CASCADE)
