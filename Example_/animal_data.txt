@@ -1,0 +1,15 @@
+Animal Encyclopedia
+
+Domain: Animalia
+Kingdom: Chordata
+Phylum: Aves
+Class: Passeriformes
+Order: Coraciiformes
+Family: Corvidae
+Genus: Pica
+Species: Eurasian Magpie
+
+Additional Properties:
+- Habitat: Woodlands
+- Diet: Omnivorous
+- Conservation Status: Least Concern
