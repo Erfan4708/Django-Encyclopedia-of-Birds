@@ -146,11 +146,3 @@ class Genus:
         self.name = name
         self.species = []
 
-
-class Species:
-    def __init__(self, name, weight, parent_group, height, lifespan):
-        self.name = name
-        self.weight = weight
-        self.parent_group = parent_group
-        self.height = height
-        self.lifespan = lifespan
