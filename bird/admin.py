@@ -3,7 +3,16 @@ from django.contrib import admin
 # Register your models here.
 from .models import Animal, Species, Domain, Kingdom, Phylum, Class, Order, Family, Genus
 
-admin.site.register(Animal)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'weight', 'parent_group', 'height', 'lifespan',)
+
+
+class AnimalAdmin(admin.ModelAdmin):
+    list_display = ('name', 'weight', 'parent_group', 'height', 'lifespan',)
+
+
+admin.site.register(Animal, AnimalAdmin)
 admin.site.register(Species)
 admin.site.register(Domain)
 admin.site.register(Kingdom)
