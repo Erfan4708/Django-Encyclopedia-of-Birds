@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- our birds -->
+
+    <div class="birds">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="titlepage">
+                        <h2>Order</h2>
+                        <p> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et
+                            dolore magna aliqua. Ut enim ad ipsum dolor sit amet, consectetur a</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- slider bird1 -->
+
+                <!-- services section start -->
+                <div class="services_section layout_padding">
+                    <div class="container">
+                        <div class="services_section_2">
+                            <div class="row">
+                                {% for order in orders %}
+                                    <div class="col-md-4">
+                                        <div><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
+                                                  style="border-radius: 10px"></div>
+                                        <div class="btn_main text-center"><a href="{% url 'family_list' order.name %}">{{ order.name }}</a></div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end our birds -->
+{% endblock content %}
