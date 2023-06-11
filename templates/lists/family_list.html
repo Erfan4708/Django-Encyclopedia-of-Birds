@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- our birds -->
+
+    <div style="height: auto" class="birds">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="titlepage">
+                        <h2>Family</h2>
+                        <p> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et
+                            dolore magna aliqua. Ut enim ad ipsum dolor sit amet, consectetur a</p>
+                        <p>
+                            <a href="{% url 'kingdom_list' domain_name %}">Domain: {{ domain_name }}</a> /
+                            <a href="{% url 'phylum_list' kingdom_name %}">Kingdom: {{ kingdom_name }}</a> /
+                            <a href="{% url 'class_list' phylum_name %}">Phylum: {{ phylum_name }}</a> /
+                            <a href="{% url 'order_list' class_name %}">Class: {{ class_name }}</a> /
+                            <a href="{% url 'family_list' order_name %}">Order: {{ order_name }}</a> /
+                            Family
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <!-- slider bird1 -->
+
+                <!-- services section start -->
+                <!-- slider bird1 -->
+                <!-- slider bird1 -->
+<div class="services_section layout_padding">
+    <div class="container">
+        <div class="services_section_2">
+            <div class="row row-cols-3 justify-content-center" style="width: auto;margin: auto">
+                {% for family in families %}
+                    <div class="col-md-4 text-center"
+                         style="background-color: white;height: auto; box-shadow: 0px 0px 18px rgba(22, 22, 23, 0.11);margin: 3px">
+                        <div><a href="{% url 'genus_list' family.name %}"><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
+                                                                                 style="border-radius: 10px; margin-top: 10px;"></a></div>
+                        <div class="btn_main text-center">
+                            <a href="{% url 'genus_list' family.name %}" class="btn btn-info" style="width: 300px">{{ family.name }}</a>
+                            <br>
+                            <a href="{% url 'delete_family' pk=family.id %}" class="btn btn-dark" style="width: 150px">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- end our birds -->
+{% endblock content %}
+
+
+

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>حذف genus</h2>
+    <p>آیا مطمئن هستید که می خواهید genus را حذف کنید؟</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="حذف">
+{#        <a href="{% url 'kingdom_list' domain_name %}">بازگشت</a>#}
+    </form>
+{% endblock content %}
