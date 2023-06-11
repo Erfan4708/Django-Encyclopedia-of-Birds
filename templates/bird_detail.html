@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- our birds -->
+    <div class="birds">
+        <div class="container">
+            <div class="row">
+                <div class="img-fluid">
+                    <div class="titlepage">
+                        <div class="text-center">
+                            <img style="border-radius: 5px" src="{% static 'images/bird1.2.jpg' %}" class="img-fluid"
+                                 alt="...">
+                        </div>
+                        <h2>{{ animal.name }}</h2>
+                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad ipsum dolor sit amet, consectetur a</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- slider bird1 -->
+                <!-- services section start -->
+                <div class="services_section layout_padding">
+                    <div class="container">
+                        <div class="services_section_2">
+                            <div class="banner_main">
+                                <div class="text-center">
+                                    <table style="height: 500px ;width: 500px ;margin: auto">
+                                        <tr>
+                                            <td class="highlight">Name:</td>
+                                            <td>{{ animal.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="highlight">Weight:</td>
+                                            <td>{{ animal.weight }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="highlight">Parent Group:</td>
+                                            <td>{{ animal.parent_group }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="highlight">Height:</td>
+                                            <td>{{ animal.height }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="highlight">LifeSpan:</td>
+                                            <td>{{ animal.lifespan }}</td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end our birds -->
+{% endblock content %}

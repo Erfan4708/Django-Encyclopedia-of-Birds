@@ -27,7 +27,7 @@
                                     <div class="col-md-4">
                                         <div><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
                                                   style="border-radius: 10px"></div>
-                                        <div class="btn_main text-center"><a href="{%  url 'detail_bird' species %}">{{ species }}</a></div>
+                                        <div class="btn_main text-center"><a href="{{ species.animal.get_absolute_url }}">{{ species }}</a></div>
                                     </div>
                                 {% endfor %}
                             </div>

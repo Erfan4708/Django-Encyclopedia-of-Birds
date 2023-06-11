@@ -1,5 +1,6 @@
 # Create your models here.
 from django.db import models
+from django.urls import reverse
 
 
 class Animal(models.Model):
@@ -8,6 +9,9 @@ class Animal(models.Model):
     parent_group = models.CharField(max_length=100)
     height = models.FloatField()
     lifespan = models.IntegerField()
+
+    def get_absolute_url(self):
+        return reverse('bird_detail', args=[self.id])
 
     def __str__(self):
         return self.name
