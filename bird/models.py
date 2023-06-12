@@ -3,20 +3,6 @@ from django.db import models
 from django.urls import reverse
 
 
-class Animal(models.Model):
-    name = models.CharField(max_length=100)
-    weight = models.FloatField()
-    parent_group = models.CharField(max_length=100)
-    height = models.FloatField()
-    lifespan = models.IntegerField()
-
-    def get_absolute_url(self):
-        return reverse('bird_detail', args=[self.id])
-
-    def __str__(self):
-        return self.name
-
-
 class Domain(models.Model):
     name = models.CharField(max_length=100)
 
@@ -73,8 +59,24 @@ class Genus(models.Model):
 
 
 class Species(models.Model):
-    animal = models.OneToOneField(Animal, on_delete=models.CASCADE, primary_key=True)
+    # animal = models.OneToOneField(Animal, on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(max_length=100)
     genus = models.ForeignKey(Genus, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.animal.name
+        return self.name
+
+
+class Animal(models.Model):
+    name = models.CharField(max_length=100)
+    weight = models.FloatField()
+    parent_group = models.CharField(max_length=100)
+    height = models.FloatField()
+    lifespan = models.IntegerField()
+    species = models.ForeignKey(Species, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('bird_detail', args=[self.id])
+
+    def __str__(self):
+        return self.name

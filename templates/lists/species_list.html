@@ -39,14 +39,12 @@
                 {% for species in specieses %}
                     <div class="col-md-4 text-center"
                          style="background-color: white;height: auto; box-shadow: 0px 0px 18px rgba(22, 22, 23, 0.11);margin: 3px">
-                        <div><a href="{{ species.animal.get_absolute_url }}"><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
-                                                                                 style="border-radius: 10px; margin-top: 10px;">
-                            {{ species }}
-                        </a></div>
+                        <div><a href="{% url 'bird_detail' species.name %}"><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
+                                                                                 style="border-radius: 10px; margin-top: 10px;"></a></div>
                         <div class="btn_main text-center">
-{#                            <div class="btn_main text-center"><a href="{{ species.animal.get_absolute_url }}">{{ species }}</a></div>#}
+                            <a href="{% url 'bird_detail' species.name %}" class="btn btn-info" style="width: 300px">{{ species.name }}</a>
                             <br>
-                            <a href="{% url 'delete_species' pk=species.pk %}" class="btn btn-dark" style="width: 150px">Delete</a>
+                            <a href="{% url 'delete_species' pk=species.id %}" class="btn btn-dark" style="width: 150px">Delete</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -62,7 +60,6 @@
 
     <!-- end our birds -->
 {% endblock content %}
-
 
 
 
