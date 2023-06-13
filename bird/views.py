@@ -235,6 +235,70 @@ def bird_detail_view(request, species_name):
                   })
 
 
+class DomainCreate(generic.CreateView):
+    model = Domain
+    template_name = 'create_list/domain_create.html'
+    fields = ['name']
+    success_url = reverse_lazy('create_kingdom')
+
+
+class KingdomCreate(generic.CreateView):
+    model = Kingdom
+    template_name = 'create_list/kingdom_create.html'
+    fields = ['name', 'domain']
+    success_url = reverse_lazy('create_phylum')
+
+
+class PhylumCreate(generic.CreateView):
+    model = Phylum
+    template_name = 'create_list/phylum_create.html'
+    fields = ['name', 'kingdom']
+    success_url = reverse_lazy('create_class')
+
+
+class ClassCreate(generic.CreateView):
+    model = Class
+    template_name = 'create_list/class_create.html'
+    fields = ['name', 'phylum']
+    success_url = reverse_lazy('create_order')
+
+
+class OrderCreate(generic.CreateView):
+    model = Order
+    template_name = 'create_list/order_create.html'
+    fields = ['name', 'Class']
+    success_url = reverse_lazy('create_family')
+
+
+class FamilyCreate(generic.CreateView):
+    model = Family
+    template_name = 'create_list/family_create.html'
+    fields = ['name', 'order']
+    success_url = reverse_lazy('create_genus')
+
+
+class GenusCreate(generic.CreateView):
+    model = Genus
+    template_name = 'create_list/genus_create.html'
+    fields = ['name', 'family']
+    success_url = reverse_lazy('create_species')
+
+
+class SpeciesCreate(generic.CreateView):
+    model = Species
+    template_name = 'create_list/species_create.html'
+    fields = ['name', 'genus']
+    success_url = reverse_lazy('create_bird')
+
+
+class BirdCreate(generic.CreateView):
+    model = Animal
+    template_name = 'create_list/bird_create.html'
+    fields = ['name', 'weight', 'height', 'parent_group', 'lifespan', 'species']
+
+
+
+
 # class BirdDetail(generic.DeleteView):
 #     model = Animal
 #     template_name = "bird_detail.html"

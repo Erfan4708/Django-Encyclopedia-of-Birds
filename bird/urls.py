@@ -4,7 +4,9 @@ from .views import BirdList, KingdomDeleteView, PhylumDeleteView, ClassDeleteVie
     GenusDeleteView, SpeciesDeleteView, KingdomList, \
     PhylumList, ClassList, OrderList, \
     FamilyList, GenusList, \
-    SpeciesList, bird_detail_view, DomainDeleteView
+    SpeciesList, bird_detail_view, DomainDeleteView, \
+    BirdCreate, DomainCreate, KingdomCreate, PhylumCreate, ClassCreate, OrderCreate, FamilyCreate, GenusCreate, \
+    SpeciesCreate
 
 urlpatterns = [
     path('', BirdList.as_view(), name='bird_list'),
@@ -25,5 +27,14 @@ urlpatterns = [
     path('species/<int:pk>/delete/', SpeciesDeleteView.as_view(), name='delete_species'),
     path('species/<str:species_name>/animal/', bird_detail_view, name='bird_detail'),
     # path('species/<int:pk>/animal/', BirdDetail.as_view(), name='bird_detail'),
+    path('create/domain', DomainCreate.as_view(), name='create_domain'),
+    path('create/kingdom', KingdomCreate.as_view(), name='create_kingdom'),
+    path('create/phylum', PhylumCreate.as_view(), name='create_phylum'),
+    path('create/class', ClassCreate.as_view(), name='create_class'),
+    path('create/order', OrderCreate.as_view(), name='create_order'),
+    path('create/family', FamilyCreate.as_view(), name='create_family'),
+    path('create/genus', GenusCreate.as_view(), name='create_genus'),
+    path('create/species', SpeciesCreate.as_view(), name='create_species'),
+    path('create/bird', BirdCreate.as_view(), name='create_bird'),
 
 ]
