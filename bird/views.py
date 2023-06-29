@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 from django.views import View
+from django.db.models import Q
 
 
 class DomainDeleteView(generic.DeleteView):
@@ -53,12 +54,27 @@ class SpeciesDeleteView(generic.DeleteView):
     template_name = 'confirm_delete_templates/species_confirm_delete.html'
     success_url = reverse_lazy('bird_list')
 
-
+from .forms import SearchForm
 class BirdList(generic.ListView):
     model = Domain
     paginate_by = 10
     template_name = 'lists/domain_list.html'
     context_object_name = 'domains'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = SearchForm()
+        return context
+
+
+class BirdSearchView(generic.ListView):
+    template_name = 'search.html'
+    context_object_name = 'search_results'
+    paginate_by = 10
+
+    def get_queryset(self):
+        query = self.request.GET.get('search_query')
+        return Animal.objects.filter(name__icontains=query)
+
 
 
 class KingdomList(generic.ListView):
@@ -330,6 +346,36 @@ class BirdCreate(generic.CreateView):
 #         species_name = self.kwargs['species_name']
 #         species = Species.objects.get(name=species_name)
 #         return Animal.objects.filter(species=species)
+
+
+from django.db.models import Q
+
+
+def search_in_animal(request):
+    result_search = None
+    if request.method == "POST":
+            search_name = request.POST.get("search_keyword_name")
+            min_weight = request.POST.get("search_keyword_weight_min") or "0"
+            max_weight = request.POST.get("search_keyword_weight_max") or "10000"
+            min_height = request.POST.get("search_keyword_height_min") or "0"
+            max_height = request.POST.get("search_keyword_height_max") or "10000"
+            min_lifespan = request.POST.get("search_keyword_lifespan_min") or "0"
+            max_lifespan = request.POST.get("search_keyword_lifespan_max") or "10000"
+            if min_weight.isnumeric() and max_weight.isnumeric() and min_height.isnumeric() and max_height.isnumeric() and min_lifespan.isnumeric() and max_lifespan.isnumeric():
+                result_search = Animal.objects.filter(
+                    name__icontains=search_name,
+                    weight__gte=int(min_weight),
+                    weight__lte=int(max_weight),
+                    height__gte=int(min_height),
+                    height__lte=int(max_height),
+                    lifespan__gte=int(min_lifespan),
+                    lifespan__lte=int(max_lifespan)
+                )
+            # else:
+            #     return render(request, 'invalid_search.html')
+    return render(request, 'search_results.html', {'result_search': result_search})
+
+
 
 
 

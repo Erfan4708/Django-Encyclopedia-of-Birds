@@ -35,6 +35,10 @@
         color: black;
         font-weight: bold;
     }
+
+    .hidden {
+        display: none;
+    }
 </style>
 
 <head>
@@ -61,7 +65,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <!-- body -->
 <body class="main-layout">
@@ -91,7 +94,38 @@
                 </div>
                 <div class="col-sm-9">
                     <ul class="email text_align_right">
-                        <li class="d_none"><i class="fa fa-search" style="cursor: pointer;" aria-hidden="true"></i></li>
+
+                        <form id="search-form" method="POST" action="{% url 'search_bird' %}" name="form_filter" class="search-form-styles" style="display: none;text-align: left">
+                            {% csrf_token %}
+                            <label for="basic-url" class="form-label">Your vanity word</label>
+                            <input type="text" class="form-control" name="search_keyword_name"
+                                   placeholder="word">
+                            <br>
+                            <label for="basic-url" class="form-label">Weight:</label>
+                            <input type="text" class="form-control" name="search_keyword_weight_min"
+                                   placeholder="min">
+                            <input type="text" class="form-control" name="search_keyword_weight_max"
+                                   placeholder="max">
+                            <br>
+                            <label for="basic-url" class="form-label">Height:</label>
+                            <input type="text" class="form-control" name="search_keyword_height_min"
+                                   placeholder="min">
+                            <input type="text" class="form-control" name="search_keyword_height_max"
+                                   placeholder="max">
+                            <br>
+                            <label for="basic-url" class="form-label">Life Span:</label>
+                            <input type="text" class="form-control" name="search_keyword_lifespan_min"
+                                   placeholder="min">
+                            <input type="text" class="form-control" name="search_keyword_lifespan_max"
+                                   placeholder="max">
+                            <br>
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
+
+
+                        <li class="d_none"><i id="search-icon" class="fa fa-search" style="cursor: pointer;"
+                                              aria-hidden="true"></i></li>
+
                         <li class="d_none"><a href="Javascript:void(0)">Join us</a></li>
                         <li>
                             <button class="openbtn" onclick="openNav()"><img src="{% static 'images/menu_btn.png' %}">
@@ -105,7 +139,7 @@
 </header>
 <!-- end header -->
 <!-- start slider section -->
-         <div class=" banner_main">
+<div class=" banner_main">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-5">
@@ -286,5 +320,44 @@
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // دریافت المان آیکون جستجو با استفاده از شناسه
+        var searchIcon = document.getElementById('search-icon');
+        var searchForm = document.getElementById('search-form');
+        var isSearchFormVisible = false;
+
+        // اضافه کردن رویداد کلیک بر روی المان آیکون جستجو
+        searchIcon.addEventListener('click', function() {
+            if (isSearchFormVisible) {
+                // اگر فرم نمایش داده شده بود، آن را مخفی کنید
+                searchForm.style.display = 'none';
+                isSearchFormVisible = false;
+            } else {
+                // در غیر این صورت، آن را نمایش دهید
+                searchForm.style.display = 'block';
+                isSearchFormVisible = true;
+            }
+        });
+    });
+</script>
+
+
+<style>
+    .search-form-styles {
+        position: fixed;
+        top: 45%;
+        left: 90%;
+        transform: translate(-30%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+    }
+</style>
+
+
+
 </body>
 </html>

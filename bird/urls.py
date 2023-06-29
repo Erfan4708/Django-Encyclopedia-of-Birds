@@ -6,9 +6,10 @@ from .views import BirdList, KingdomDeleteView, PhylumDeleteView, ClassDeleteVie
     FamilyList, GenusList, \
     SpeciesList, bird_detail_view, DomainDeleteView, \
     BirdCreate, DomainCreate, KingdomCreate, PhylumCreate, ClassCreate, OrderCreate, FamilyCreate, GenusCreate, \
-    SpeciesCreate
+    SpeciesCreate, search_in_animal
 
 urlpatterns = [
+    path('search/', search_in_animal, name='search_bird'),
     path('', BirdList.as_view(), name='bird_list'),
     path('/domain/<str:domain_name>/kingdoms/', KingdomList.as_view(), name='kingdom_list'),
     path('domain/<int:pk>/delete/', DomainDeleteView.as_view(), name='delete_domain'),

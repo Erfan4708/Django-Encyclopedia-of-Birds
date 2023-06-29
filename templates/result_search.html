@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>نتایج جستجو</title>
+</head>
+<body>
+    <h1>نتایج جستجو برای "{{ search_query }}"</h1>
+
+    {% if results %}
+        <ul>
+            {% for result in results %}
+                <li>
+                    <h2>{{ result.name }}</h2>
+                    <p>گونه: {{ result.species.name }}</p>
+                    <!-- دیگر اطلاعات مورد نیاز را در اینجا نمایش دهید -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>هیچ نتیجه‌ای یافت نشد.</p>
+    {% endif %}
+<form action="/birds/search/" method="get">
+    <input type="text" name="search_query">
+    <button type="submit">جستجو</button>
+</form>
+
+</body>
+</html>

@@ -2,6 +2,10 @@
 {% load static %}
 {% block content %}
     <!-- our birds -->
+    <form method="GET" action="{% url 'bird_list' %}">
+        <input type="text" name="q" placeholder="Search animals">
+        <button type="submit">Search</button>
+    </form>
 
     <div style="height: auto" class="birds">
         <div class="container">
@@ -15,15 +19,6 @@
                     </div>
                 </div>
             </div>
-        <i id="search-icon" class="fa fa-search" style="cursor: pointer;"
-                                   aria-hidden="true"></i>
-
-                                <!-- فرم جستجو که در ابتدا پنهان است -->
-                                <form id="search-form" method="GET" action="{% url 'search_bird' %}"
-                                      style="display: none;">
-                                    {{ search_form }}
-                                    <button type="submit">جستجو</button>
-                                </form>
             <div class="row justify-content-center">
                 <!-- slider bird1 -->
 
@@ -34,23 +29,23 @@
                     <div class="container">
                         <div class="services_section_2">
                             <div class="row row-cols-3 justify-content-center" style="width: auto;margin: auto">
-
-
-                                {% for domain in domains %}
+                                {% for result in search_results %}
                                     <div class="col-md-4 text-center"
                                          style="background-color: white;height: auto; box-shadow: 0px 0px 18px rgba(22, 22, 23, 0.11);margin: 3px">
-                                        <div><a href="{% url 'kingdom_list' domain.name %}"><img
+                                        <div><a href="{% url 'bird_detail' result.name %}"><img
                                                 src="{% static 'images/bird1.2.jpg' %}" class="services_img"
                                                 style="border-radius: 10px; margin-top: 10px;"></a></div>
                                         <div class="btn_main text-center">
-                                            <a href="{% url 'kingdom_list' domain.name %}" class="btn btn-info"
-                                               style="width: 300px">{{ domain.name }}</a>
+                                            <a href="{% url 'bird_detail' result.name %}" class="btn btn-info"
+                                               style="width: 300px">{{ species.name }}</a>
                                             <br>
-                                            <a href="{% url 'delete_domain' pk=domain.id %}" class="btn btn-dark"
-                                               style="width: 150px">Delete</a>
                                         </div>
                                     </div>
+                                {% empty %}
+                                    <p>نتیجه‌ای یافت نشد.</p>
                                 {% endfor %}
+
+
                             </div>
                         </div>
                     </div>
@@ -62,12 +57,4 @@
     </div>
 
     <!-- end our birds -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    // اضافه کردن رویداد کلیک به دکمه
-    document.getElementById("search-icon").addEventListener("click", function() {
-        // نمایش فرم و مخفی کردن دکمه
-        document.getElementById("search-icon").style.display = "none";
-        document.getElementById("search-form").style.display = "block";
-    </script>
 {% endblock content %}
