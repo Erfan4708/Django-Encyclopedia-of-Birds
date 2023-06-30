@@ -352,7 +352,7 @@ from django.db.models import Q
 
 
 def search_in_animal(request):
-    result_search = None
+    search_result = None
     if request.method == "POST":
             search_name = request.POST.get("search_keyword_name")
             min_weight = request.POST.get("search_keyword_weight_min") or "0"
@@ -362,7 +362,7 @@ def search_in_animal(request):
             min_lifespan = request.POST.get("search_keyword_lifespan_min") or "0"
             max_lifespan = request.POST.get("search_keyword_lifespan_max") or "10000"
             if min_weight.isnumeric() and max_weight.isnumeric() and min_height.isnumeric() and max_height.isnumeric() and min_lifespan.isnumeric() and max_lifespan.isnumeric():
-                result_search = Animal.objects.filter(
+                search_result = Animal.objects.filter(
                     name__icontains=search_name,
                     weight__gte=int(min_weight),
                     weight__lte=int(max_weight),
@@ -373,7 +373,7 @@ def search_in_animal(request):
                 )
             # else:
             #     return render(request, 'invalid_search.html')
-    return render(request, 'search_results.html', {'result_search': result_search})
+    return render(request, 'search_results.html', {'search_result': search_result})
 
 
 

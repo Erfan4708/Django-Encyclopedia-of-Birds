@@ -15,8 +15,6 @@
                     </div>
                 </div>
             </div>
-        <i id="search-icon" class="fa fa-search" style="cursor: pointer;"
-                                   aria-hidden="true"></i>
 
                                 <!-- فرم جستجو که در ابتدا پنهان است -->
                                 <form id="search-form" method="GET" action="{% url 'search_bird' %}"
@@ -44,7 +42,7 @@
                                                 style="border-radius: 10px; margin-top: 10px;"></a></div>
                                         <div class="btn_main text-center">
                                             <a href="{% url 'kingdom_list' domain.name %}" class="btn btn-info"
-                                               style="width: 300px">{{ domain.name }}</a>
+                                               style="width: 200px">{{ domain.name }}</a>
                                             <br>
                                             <a href="{% url 'delete_domain' pk=domain.id %}" class="btn btn-dark"
                                                style="width: 150px">Delete</a>

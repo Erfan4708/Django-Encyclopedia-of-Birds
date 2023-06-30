@@ -32,7 +32,7 @@
                         <div><a href="{% url 'phylum_list' kingdom.name %}"><img src="{% static 'images/bird1.2.jpg' %}" class="services_img"
                                                                                  style="border-radius: 10px; margin-top: 10px;"></a></div>
                         <div class="btn_main text-center">
-                            <a href="{% url 'phylum_list' kingdom.name %}" class="btn btn-info" style="width: 300px">{{ kingdom.name }}</a>
+                            <a href="{% url 'phylum_list' kingdom.name %}" class="btn btn-info" style="width: 200px">{{ kingdom.name }}</a>
                             <br>
                             <a href="{% url 'delete_kingdom' pk=kingdom.id %}" class="btn btn-dark" style="width: 150px">Delete</a>
                         </div>
