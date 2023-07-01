@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h2>حذف Kingdom</h2>
-    <p>آیا مطمئن هستید که می خواهید Kingdom را حذف کنید؟</p>
-    <form method="post">
+    <br>
+    <div class="content text-center">
+    <h2>Delete Domain</h2>
+    <p>Are you sure you want to delete the Domain?</p>
+    <form method="post" class="delete-class-form">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="حذف">
-{#        <a href="{% url 'kingdom_list' domain_name %}">بازگشت</a>#}
+        <input type="submit" value="Delete">
     </form>
+    </div>
+
 {% endblock content %}
