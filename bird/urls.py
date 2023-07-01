@@ -6,7 +6,7 @@ from .views import BirdList, KingdomDeleteView, PhylumDeleteView, ClassDeleteVie
     FamilyList, GenusList, \
     SpeciesList, bird_detail_view, DomainDeleteView, \
     BirdCreate, DomainCreate, KingdomCreate, PhylumCreate, ClassCreate, OrderCreate, FamilyCreate, GenusCreate, \
-    SpeciesCreate, search_in_animal
+    SpeciesCreate, search_in_animal, compare_bird, select_bird
 
 urlpatterns = [
     path('search/', search_in_animal, name='search_bird'),
@@ -37,5 +37,7 @@ urlpatterns = [
     path('create/genus', GenusCreate.as_view(), name='create_genus'),
     path('create/species', SpeciesCreate.as_view(), name='create_species'),
     path('create/bird', BirdCreate.as_view(), name='create_bird'),
+    path('compare-to/', compare_bird, name='compare_bird'),
+    path("compare-birds/", select_bird, name='select_bird')
 
 ]

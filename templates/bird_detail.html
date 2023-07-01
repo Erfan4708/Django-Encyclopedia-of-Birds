@@ -51,11 +51,24 @@
 
                                 </div>
                             </div>
+
+
+                            <form id="compare-form" method="POST" action="{% url 'compare_bird' %}" name="compare-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="animal_name" value="{{ animal.name }}">
+                                <input type="hidden" name="animal_weight" value="{{ animal.weight }}">
+                                <input type="hidden" name="animal_parent_group" value="{{ animal.parent_group }}">
+                                <input type="hidden" name="animal_height" value="{{ animal.height }}">
+                                <input type="hidden" name="animal_lifespan" value="{{ animal.lifespan }}">
+                                <button class="btn btn-info" type="submit">Compare</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- end our birds -->
 {% endblock content %}

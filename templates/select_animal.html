@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- our birds -->
+
+    <div style="height: auto" class="birds">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="services_section layout_padding">
+                    <div class="container">
+                        <div class="services_section_2">
+                            <div class="row row-cols-3 justify-content-center" style="width: auto;margin: auto">
+                                {% for animal in all_animal %}
+                                    <div class="col-md-4 text-center"
+                                         style="background-color: white;height: auto; box-shadow: 0px 0px 18px rgba(22, 22, 23, 0.11);margin: 3px">
+                                        <div><img
+                                                src="{% static 'images/bird1.2.jpg' %}" class="services_img"
+                                                style="border-radius: 10px; margin-top: 10px;"></a></div>
+                                        <div class="btn_main text-center">
+                                            <a href="{{ animal.get_absolute_url }}" class="btn btn-info"
+                                               style="width: 200px">{{ animal.name }}</a>
+                                            <br>
+                                            <form id="select-form" method="POST" action="{% url 'select_bird' %}"
+                                                  name="compare-form">
+                                                {% csrf_token %}
+                                                 <input type="hidden" name="animal_name_1" value="{{ name_1 }}">
+                                                <input type="hidden" name="animal_weight_1" value="{{ weight_1 }}">
+                                                <input type="hidden" name="animal_parent_group_1"
+                                                       value="{{ parent_group_1 }}">
+                                                <input type="hidden" name="animal_height_1" value="{{ height_1 }}">
+                                                <input type="hidden" name="animal_lifespan_1"
+                                                       value="{{ lifespan_1 }}">
+
+                                                <input type="hidden" name="animal_name" value="{{ animal.name }}">
+                                                <input type="hidden" name="animal_weight" value="{{ animal.weight }}">
+                                                <input type="hidden" name="animal_parent_group"
+                                                       value="{{ animal.parent_group }}">
+                                                <input type="hidden" name="animal_height" value="{{ animal.height }}">
+                                                <input type="hidden" name="animal_lifespan"
+                                                       value="{{ animal.lifespan }}">
+                                                <button class="btn btn-success" type="submit">compared to {{ name_1 }}</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- end our birds -->
+{% endblock content %}
+
+
+

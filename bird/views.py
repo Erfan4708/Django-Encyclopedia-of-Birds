@@ -54,12 +54,16 @@ class SpeciesDeleteView(generic.DeleteView):
     template_name = 'confirm_delete_templates/species_confirm_delete.html'
     success_url = reverse_lazy('bird_list')
 
+
 from .forms import SearchForm
+
+
 class BirdList(generic.ListView):
     model = Domain
     paginate_by = 10
     template_name = 'lists/domain_list.html'
     context_object_name = 'domains'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_form'] = SearchForm()
@@ -74,7 +78,6 @@ class BirdSearchView(generic.ListView):
     def get_queryset(self):
         query = self.request.GET.get('search_query')
         return Animal.objects.filter(name__icontains=query)
-
 
 
 class KingdomList(generic.ListView):
@@ -313,8 +316,6 @@ class BirdCreate(generic.CreateView):
     fields = ['name', 'weight', 'height', 'parent_group', 'lifespan', 'species']
 
 
-
-
 # class BirdDetail(generic.DeleteView):
 #     model = Animal
 #     template_name = "bird_detail.html"
@@ -354,31 +355,72 @@ from django.db.models import Q
 def search_in_animal(request):
     search_result = None
     if request.method == "POST":
-            search_name = request.POST.get("search_keyword_name")
-            min_weight = request.POST.get("search_keyword_weight_min") or "0"
-            max_weight = request.POST.get("search_keyword_weight_max") or "10000"
-            min_height = request.POST.get("search_keyword_height_min") or "0"
-            max_height = request.POST.get("search_keyword_height_max") or "10000"
-            min_lifespan = request.POST.get("search_keyword_lifespan_min") or "0"
-            max_lifespan = request.POST.get("search_keyword_lifespan_max") or "10000"
-            if min_weight.isnumeric() and max_weight.isnumeric() and min_height.isnumeric() and max_height.isnumeric() and min_lifespan.isnumeric() and max_lifespan.isnumeric():
-                search_result = Animal.objects.filter(
-                    name__icontains=search_name,
-                    weight__gte=int(min_weight),
-                    weight__lte=int(max_weight),
-                    height__gte=int(min_height),
-                    height__lte=int(max_height),
-                    lifespan__gte=int(min_lifespan),
-                    lifespan__lte=int(max_lifespan)
-                )
-            # else:
-            #     return render(request, 'invalid_search.html')
+        search_name = request.POST.get("search_keyword_name")
+        min_weight = request.POST.get("search_keyword_weight_min") or "0"
+        max_weight = request.POST.get("search_keyword_weight_max") or "10000"
+        min_height = request.POST.get("search_keyword_height_min") or "0"
+        max_height = request.POST.get("search_keyword_height_max") or "10000"
+        min_lifespan = request.POST.get("search_keyword_lifespan_min") or "0"
+        max_lifespan = request.POST.get("search_keyword_lifespan_max") or "10000"
+        if min_weight.isnumeric() and max_weight.isnumeric() and min_height.isnumeric() and max_height.isnumeric() and min_lifespan.isnumeric() and max_lifespan.isnumeric():
+            search_result = Animal.objects.filter(
+                name__icontains=search_name,
+                weight__gte=int(min_weight),
+                weight__lte=int(max_weight),
+                height__gte=int(min_height),
+                height__lte=int(max_height),
+                lifespan__gte=int(min_lifespan),
+                lifespan__lte=int(max_lifespan)
+            )
+        # else:
+        #     return render(request, 'invalid_search.html')
     return render(request, 'search_results.html', {'search_result': search_result})
 
 
+def compare_bird(request):
+    name_1 = request.POST.get("animal_name")
+    weight_1 = request.POST.get("animal_weight")
+    parent_group_1 = request.POST.get("animal_parent_group")
+    height_1 = request.POST.get("animal_height")
+    lifespan_1 = request.POST.get("animal_lifespan")
+
+    request.session["name_1"] = name_1
+    request.session["weight_1"] = weight_1
+    request.session["parent_group_1"] = parent_group_1
+    request.session["height_1"] = height_1
+    request.session["lifespan_1"] = lifespan_1
+
+    all_animal = Animal.objects.all()
+    #
+    # redirect('select_bird', context={'name_1': name_1, 'all_animal': all_animal})
+    return render(request, 'select_animal.html', {'name_1': name_1,
+                                                  'weight_1': weight_1,
+                                                  'parent_group_1': parent_group_1,
+                                                  'height_1': height_1,
+                                                  'lifespan_1': lifespan_1,
+                                                  'all_animal': all_animal})
 
 
+def select_bird(request):
+    name_1 = request.POST.get("animal_name_1")
+    weight_1 = request.POST.get("animal_weight_1")
+    parent_group_1 = request.POST.get("animal_parent_group_1")
+    height_1 = request.POST.get("animal_height_1")
+    lifespan_1 = request.POST.get("animal_lifespan_1")
 
-
-
-
+    name_2 = request.POST.get("animal_name")
+    weight_2 = request.POST.get("animal_weight")
+    parent_group_2 = request.POST.get("animal_parent_group")
+    height_2 = request.POST.get("animal_height")
+    lifespan_2 = request.POST.get("animal_lifespan")
+    return render(request, 'compare_animals.html', {'name_1': name_1,
+                                                    'weight_1': weight_1,
+                                                    'parent_group_1': parent_group_1,
+                                                    'height_1': height_1,
+                                                    'lifespan_1': lifespan_1,
+                                                    'name_2': name_2,
+                                                    'weight_2': weight_2,
+                                                    'parent_group_2': parent_group_2,
+                                                    'height_2': height_2,
+                                                    'lifespan_2': lifespan_2
+                                                    })

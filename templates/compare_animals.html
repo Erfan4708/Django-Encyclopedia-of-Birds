@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- our birds -->
+    <div class="birds">
+        <div class="container">
+            <div class="row">
+                <div class="img-fluid">
+                    <div class="titlepage">
+                        <h2>{{ name_1 }} Vs {{ name_2 }}</h2>
+                        <p>ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad ipsum dolor sit amet, consectetur a</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- slider bird1 -->
+                <!-- services section start -->
+                <div class="services_section layout_padding">
+                    <div class="container">
+                        <div class="services_section_2">
+                            <div class="banner_main">
+                                <div class="text-center">
+                                    <table style="margin: auto">
+                                        <tr>
+                                            <td style="border-bottom: 1px solid #ccc;">
+                                                <img style="border-radius: 5px" src="{% static 'images/bird1.2.jpg' %}" alt="Bird 1">
+                                            </td>
+                                            <td style="border-bottom: 1px solid #ccc;">
+                                                <img style="border-radius: 5px" src="{% static 'images/bird1.2.jpg' %}" alt="Bird 2">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td class="highlight">Name:</td>
+                                                        <td>{{ name_1 }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="highlight">Weight:</td>
+                                                        <td>{{ weight_1 }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="highlight">Parent group:</td>
+                                                        <td>{{ parent_group_1 }}</td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td class="highlight">Height:</td>
+                                                        <td>{{ height_1 }}</td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td class="highlight">Life span:</td>
+                                                        <td>{{ lifespan_1 }}</td>
+                                                    </tr>
+                                                    <!-- ویژگی‌های دیگر محصول 1 -->
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <table style="width: 100%;">
+                                                        <tr>
+                                                        <td class="highlight">Name:</td>
+                                                        <td>{{ name_2 }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="highlight">Weight:</td>
+                                                        <td>{{ weight_2 }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="highlight">Parent group:</td>
+                                                        <td>{{ parent_group_2 }}</td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td class="highlight">Height:</td>
+                                                        <td>{{ height_2 }}</td>
+                                                    </tr>
+                                                     <tr>
+                                                        <td class="highlight">Life span:</td>
+                                                        <td>{{ lifespan_2 }}</td>
+                                                    </tr>
+                                                    <!-- ویژگی‌های دیگر محصول 2 -->
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <form id="compare-form" method="POST" action="{% url 'compare_bird' %}" name="compare-form" style="float: right">
+                                {% csrf_token %}
+                                <input type="hidden" name="animal_name" value="{{ name_1 }}">
+                                <input type="hidden" name="animal_weight" value="{{ weight_1 }}">
+                                <input type="hidden" name="animal_parent_group" value="{{ parent_group_1 }}">
+                                <input type="hidden" name="animal_height" value="{{ height_1 }}">
+                                <input type="hidden" name="animal_lifespan" value="{{ lifespan_1 }}">
+                                <button class="btn btn-danger" type="submit">Remove {{ name_2 }}</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end our birds -->
+{% endblock content %}
